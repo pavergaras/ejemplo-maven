@@ -47,7 +47,7 @@ pipeline {
             sh "echo 'fase success'"
         }
         failure {
-            sh "echo 'fase failure'"
+            sh "echo 'fase failure'  "
         }
     }
 }
