@@ -1,24 +1,14 @@
 package com.devopsusach2020;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.devopsusach2020.model.Pais;
-import com.devopsusach2020.rest.RestData;
+@SpringBootApplication
+public class DevOpsUsach2020Application {
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class DevOpsUsach2020ApplicationTests {
-
-	@Test
-	void contextLoads() {		
-
-		RestData restData = new RestData();
-        Pais response = restData.getData("HOLA devops");
-        assertEquals("Mensaje Recibido: HOLA devops", response.getMensaje());
-
+	public static void main(String[] args) {
+		SpringApplication.run(DevOpsUsach2020Application.class, args);
 	}
 
 }
+
