@@ -104,7 +104,7 @@ pipeline {
         
          stage('Paso 6: Bajar Nexus Stage') {
             steps {
-                sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASS http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
+                sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASS http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar -O'
             }
         }                
    
@@ -112,7 +112,7 @@ pipeline {
         stage("Paso 7: Levantar Springboot APP"){
             steps {
                 // sh 'mvn spring-boot:run &'
-                sh 'nohup bash java -jar DevOpsUsach2020-0.0.7.jar & >/dev/null'
+                sh 'nohup bash java -jar DevOpsUsach2020-0.0.1.jar & >/dev/null'
             }
         }
         stage("Paso 8: Dormir(Esperar 20sg) "){
