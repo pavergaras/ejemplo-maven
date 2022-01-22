@@ -37,16 +37,22 @@ pipeline {
                 // Run Maven on a Unix agent.
                 sh "mvn clean package -e"
                 }
-            }            
+            } 
+            post {
+                //record the test results and archive the jar file.
+                success {
+                    archiveArtifacts artifacts:'build/*.jar'
+                }
+            }           
         }
 
         stage("Paso 4: Análisis SonarQube y subir a Nexus el artefacto"){
             steps {
-                withSonarQubeEnv('sonarqube') {
+                /* withSonarQubeEnv('sonarqube') {
                     sh "echo 'Calling sonar Service in another docker container!'"
                     // Run Maven on a Unix agent to execute Sonar.
                     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=github-sonar'
-                }
+                } */
             }
 
             post {
