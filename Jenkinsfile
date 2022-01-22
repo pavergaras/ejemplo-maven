@@ -82,74 +82,34 @@ pipeline {
                    
         }    
 
-        /* stage("Paso 5: Subida a Nexus"){
-            steps{
-                nexusPublisher nexusInstanceId: 'nexus', 
-                    nexusRepositoryId: 'devops-usach-nexus', 
-                    packages: [[$class: 'MavenPackage', 
-                                mavenAssetList: [[
-                                    classifier: '', 
-                                    extension: '', 
-                                    // filePath: '/var/jenkins_home/workspace/job-pipeline-webhook/build/DevOpsUsach2020-0.0.1.jar'
-                                    filePath: 'build/DevOpsUsach2020-0.0.1.jar'
-                                    ]],
-                                mavenCoordinate: [
-                                    artifactId: 'DevOpsUsach2020', 
-                                    groupId: 'com.devopsusach2020', 
-                                    packaging: 'jar',
-                                     version: '0.0.7'
-                                ]]]
-            }     
-            
-        }    */         
         
-         stage('Paso 6: Bajar Nexus Stage') {
+         stage('Paso 5: Bajar Nexus Stage') {
             steps {
                 sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASS http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar -O'
             }
         }                
    
 
-        stage("Paso 7: Levantar Springboot APP"){
+        stage("Paso 6: Levantar Springboot APP"){
             steps {
                 // sh 'mvn spring-boot:run &'
                 sh 'nohup bash java -jar DevOpsUsach2020-0.0.1.jar & >/dev/null'
             }
         }
-        stage("Paso 8: Dormir(Esperar 20sg) "){
+        stage("Paso 7: Dormir(Esperar 20sg) "){
             steps {
                 sh 'sleep 20'
             }
         }
 
-        stage("Paso 9: Test Alive Service - Testing Application!"){
+        stage("Paso 8: Test Alive Service - Testing Application!"){
             steps {
                 sh 'curl -X GET "http://nexus:8081/rest/mscovid/test?msg=testing"'
             }
         }
 
-        // stage("Paso 5: Subida a Nexus"){
-        //     steps{
-        //         nexusPublisher nexusInstanceId: 'nexus', 
-        //             nexusRepositoryId: 'devops-usach-nexus', 
-        //             packages: [[$class: 'MavenPackage', 
-        //                         mavenAssetList: [[
-        //                             classifier: '', 
-        //                             extension: '', 
-        //                             // filePath: '/var/jenkins_home/workspace/job-pipeline-webhook/build/DevOpsUsach2020-0.0.1.jar'
-        //                             filePath: 'build/DevOpsUsach2020-0.0.7.jar'
-        //                             ]],
-        //                         mavenCoordinate: [
-        //                             artifactId: 'DevOpsUsach2020', 
-        //                             groupId: 'com.devopsusach2020', 
-        //                             packaging: 'jar',
-        //                              version: '1.0.0'
-        //                         ]]]
-        //     }     
-            
-        // }   
 
-        stage("Paso 10: Subir nueva Version"){
+        stage("Paso 9: Subir nueva Version"){
             steps {
                 //archiveArtifacts artifacts:'build/*.jar'
                 nexusPublisher nexusInstanceId: 'nexus',
