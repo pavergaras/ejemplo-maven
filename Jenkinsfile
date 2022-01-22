@@ -7,7 +7,7 @@ pipeline {
 
      environment {
         NEXUS_USER = credentials('user-nexus')
-        NEXUS_PASS = credentials('nexus-pass')
+        NEXUS_PASS = credentials('password-nexus')
     }
 
     stages {        
@@ -72,11 +72,12 @@ pipeline {
             
         }            
         
-        stage('Paso 6: Bajar Nexus Stage') {
+         stage('Paso 6: Bajar Nexus Stage') {
             steps {
                 sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASS http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
             }
         }                
+   
 
         stage("Paso 7: Levantar Springboot APP"){
             steps {
@@ -90,13 +91,13 @@ pipeline {
             }
         }
 
-        stage("Paso 9: Test Alive Service - Testing Application!"){
+                stage("Paso 9: Test Alive Service - Testing Application!"){
             steps {
                 sh 'curl -X GET "http://nexus:8081/rest/mscovid/test?msg=testing"'
             }
         }
 
-        // stage("Paso 10: Subida a Nexus Nuevamente"){
+        // stage("Paso 5: Subida a Nexus"){
         //     steps{
         //         nexusPublisher nexusInstanceId: 'nexus', 
         //             nexusRepositoryId: 'devops-usach-nexus', 
@@ -115,7 +116,7 @@ pipeline {
         //                         ]]]
         //     }     
             
-        // }   
+        // }     
     }
     post {
         always {
