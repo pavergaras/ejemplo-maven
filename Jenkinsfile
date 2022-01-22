@@ -92,30 +92,30 @@ pipeline {
 
         stage("Paso 9: Test Alive Service - Testing Application!"){
             steps {
-                sh 'curl -X GET "http://nexucito:8081/rest/mscovid/test?msg=testing"'
+                sh 'curl -X GET "http://nexus:8081/rest/mscovid/test?msg=testing"'
             }
         }
 
-        stage("Paso 10: Subida a Nexus Nuevamente"){
-            steps{
-                nexusPublisher nexusInstanceId: 'nexus', 
-                    nexusRepositoryId: 'devops-usach-nexus', 
-                    packages: [[$class: 'MavenPackage', 
-                                mavenAssetList: [[
-                                    classifier: '', 
-                                    extension: '', 
-                                    // filePath: '/var/jenkins_home/workspace/job-pipeline-webhook/build/DevOpsUsach2020-0.0.1.jar'
-                                    filePath: 'build/DevOpsUsach2020-0.0.7.jar'
-                                    ]],
-                                mavenCoordinate: [
-                                    artifactId: 'DevOpsUsach2020', 
-                                    groupId: 'com.devopsusach2020', 
-                                    packaging: 'jar',
-                                     version: '1.0.0'
-                                ]]]
-            }     
+        // stage("Paso 10: Subida a Nexus Nuevamente"){
+        //     steps{
+        //         nexusPublisher nexusInstanceId: 'nexus', 
+        //             nexusRepositoryId: 'devops-usach-nexus', 
+        //             packages: [[$class: 'MavenPackage', 
+        //                         mavenAssetList: [[
+        //                             classifier: '', 
+        //                             extension: '', 
+        //                             // filePath: '/var/jenkins_home/workspace/job-pipeline-webhook/build/DevOpsUsach2020-0.0.1.jar'
+        //                             filePath: 'build/DevOpsUsach2020-0.0.7.jar'
+        //                             ]],
+        //                         mavenCoordinate: [
+        //                             artifactId: 'DevOpsUsach2020', 
+        //                             groupId: 'com.devopsusach2020', 
+        //                             packaging: 'jar',
+        //                              version: '1.0.0'
+        //                         ]]]
+        //     }     
             
-        }   
+        // }   
     }
     post {
         always {
