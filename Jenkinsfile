@@ -74,7 +74,7 @@ pipeline {
         
         stage('Paso 6: Bajar Nexus Stage') {
             steps {
-                sh 'curl -X GET -u $user-nexus:$password-nexus http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
+                sh 'curl -X GET -u $NEXUS_USER:$NEXUS_PASS http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
             }
         }                
 
