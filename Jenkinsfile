@@ -48,11 +48,12 @@ pipeline {
 
         stage("Paso 4: Análisis SonarQube y subir a Nexus el artefacto"){
             steps {
-                /* withSonarQubeEnv('sonarqube') {
+                 /*withSonarQubeEnv('sonarqube') {
                     sh "echo 'Calling sonar Service in another docker container!'"
                     // Run Maven on a Unix agent to execute Sonar.
                     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=github-sonar'
                 } */
+                sh "echo 'paso 4'"
             }
 
             post {
