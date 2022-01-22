@@ -74,7 +74,7 @@ pipeline {
         
         stage('Paso 6: Bajar Nexus Stage') {
             steps {
-                sh 'curl -X GET -u $user-nexus:$password-nexus http://nexucito:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
+                sh 'curl -X GET -u $user-nexus:$password-nexus http://nexus:8081/repository/devops-usach-nexus/com/devopsusach2020/DevOpsUsach2020/0.0.7/DevOpsUsach2020-0.0.7.jar -O'
             }
         }                
 
@@ -84,7 +84,7 @@ pipeline {
                 sh 'nohup bash java -jar DevOpsUsach2020-0.0.7.jar & >/dev/null'
             }
         }
-        stage("Paso 8: Dormir(Esperar 10sg) "){
+        stage("Paso 8: Dormir(Esperar 20sg) "){
             steps {
                 sh 'sleep 20'
             }
